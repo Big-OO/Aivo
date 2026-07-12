@@ -1,47 +1,67 @@
-# <p align="center"><img src="app/src/main/ic_launcher-playstore.png" width="120" height="120" style="border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border: 4px solid #6200EE;" /></p>
+# <p align="center"><img src="app/src/main/ic_launcher-playstore.png" width="120" height="120" style="border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 4px solid #6200EE;" /></p>
 
-# <p align="center">Aivo</p>
-<p align="center"><strong>Aivo</strong> is a premium, conversational AI Shopping Assistant built with Jetpack Compose, designed to interact seamlessly with Shopify stores via Android App Functions.</p>
+# <p align="center">Aivo: Universal AI App Function Orchestrator</p>
 
----
-
-## 🌟 Key Features
-
-### 🛜 Real-Time Connectivity Monitoring
-*   **Automatic Detection**: Continuously monitors network state using `ConnectivityManager`.
-*   **Interactive Warning Banners**: Shows a sliding offline warning banner at the top of the chat area and disables voice/text inputs when connection is lost.
-*   **Back-Online Notifications**: Pops down an emerald-colored success banner with slide/fade animations when connectivity is restored, auto-dismissing after 3 seconds.
-
-### 🛍️ Unified Product Options Picker
-*   **Interactive Variant Selector**: Automatically parses product parameters (`size`, `color`, `quantity`) from assistant responses and bundles them into an interactive Card.
-*   **Custom Chip Controls**: Allows selecting variants directly inside the chat UI before confirming.
-*   **One-Tap Confirm**: Submits all variant options to the assistant in a single structured message (e.g. `Quantity: 2, Size: M, Color: Black`).
-
-### 🖼️ Coil 3 Network Image Loading
-*   **Premium Product Media**: Integrated network image rendering directly inside chat messages.
-*   **Coil OkHttp Engine**: Uses `coil-network-okhttp` for high-performance HTTP/HTTPS image fetching.
-
-### 💵 USD Currency Display
-*   **Default Currency**: Supports pricing defaults in **USD ($)** instead of local currencies, standardizing display formatting across search results and details views.
+<p align="center">
+  <strong>Aivo</strong> is a state-of-the-art AI Assistant application designed to discover, orchestrate, and dynamically execute Android App Functions across all installed applications on a device. It bridges the gap between natural language user intents and structured application logic.
+</p>
 
 ---
 
-## 🛠️ Architecture & Tech Stack
-*   **Core Logic**: Kotlin, Android Architecture Components.
-*   **UI Framework**: Jetpack Compose, Material 3 with rich transitions and custom state-driven animations.
-*   **Networking & Loading**: Coil 3, OkHttp.
-*   **Integrations**: Android App Functions SDK.
+## ⚙️ How It Works
+
+Aivo acts as an intelligent orchestration layer on top of the Android system, utilizing a three-stage runtime flow:
+
+```mermaid
+graph TD
+    A[User Input: Voice/Text] --> B[Gemini AI Agent]
+    C[AppDiscoveryManager] -- Discovers Schemas --> B
+    B -- Matches Intent --> D[UniversalAppFunctionRunner]
+    D -- Standard Apps --> E[AppFunctionManager API]
+    D -- Special Proxies --> F[IPC Broadcast / Carto Proxy]
+```
+
+### 1. Dynamic App Function Discovery
+Using the `AppDiscoveryManager`, Aivo scans the device for services responding to the `android.app.appfunctions.AppFunctionService` intent. It fetches function schemas, simple names, parameters, and types dynamically.
+*   **Compile-Time Metadata Extraction**: Leverages standard App Functions APIs.
+*   **APK Fallback Parser**: Includes a robust fallback parser to extract compiled schemas directly from package APK manifests for development.
+*   **Context Control**: Provides toggle switches on the dashboard to enable or disable specific apps from the AI's vocabulary.
+
+### 2. AI Intent Mapping
+Aivo streams the active function schemas to an LLM reasoning engine (`GeminiAiAgent`). The agent translates user natural language commands into a structured function call containing the target package, function simple name, and JSON arguments.
+
+### 3. Universal Execution Runner
+The `UniversalAppFunctionRunner` executes the structured function call:
+*   **Standard Execution**: Invokes Android's native `AppFunctionManager` for standard system and third-party app functions.
+*   **IPC Proxy Execution**: Employs a custom broadcast/messenger proxy mechanism to route executions safely into isolated external environments (like the Shopify `Carto` runtime proxy).
+
+---
+
+## ✨ Rich UI & Interaction Features
+
+*   **Interactive Options Picker**: Parses variant requests (like size, color, quantity) from AI outputs and renders a custom picker Card with selectable chips, sending selections back in a single formatted input.
+*   **Network Image Fetching (Coil 3)**: Uses a dedicated OkHttp network engine to fetch and display image previews.
+*   **Visual Voice Recorder**: Captures speech input with real-time waveform visualization, matching speaking volume level parameters.
+*   **Smart Connectivity Observer**: Detects offline/online transitions, disabling interactive panels when disconnected, and displays a green emerald "Back Online" success notification with slide/fade entry-exit animations.
+
+---
+
+## 🛠️ Technology Stack
+*   **Core Architecture**: Kotlin Coroutines, Flow, StateFlow, Android Architecture Components.
+*   **UI Framework**: Jetpack Compose, Material 3, custom Compose Animations.
+*   **Media & Networking**: Coil 3 (Multiplatform network module), OkHttp.
+*   **App Orchestration**: Android App Functions SDK, IPC Messenger Services.
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Build Requirements
 *   Android SDK 34+
+*   JDK 17
 *   Gradle 8.5+
 
-### Build & Run
+### Compile Project
 ```bash
-# Compile and build debug apk
 ./gradlew assembleDebug
 ```
