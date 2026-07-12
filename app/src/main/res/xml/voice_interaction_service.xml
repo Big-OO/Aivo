@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<voice-interaction-service 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:sessionService="com.assistant.aivo.voice.AivoVoiceInteractionSessionService"
+    android:recognitionService="com.assistant.aivo.voice.AivoRecognitionService"
+    android:supportsAssist="true"
+    android:supportsLocalInteraction="true" />

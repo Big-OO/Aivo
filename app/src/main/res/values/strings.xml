@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Aivo</string>
+    <string name="ai_welcome_title">How can I help you?</string>
+    <string name="ai_welcome_subtitle">I can assist you with finding products, checking your cart, comparing items, styling outfits, or managing checkout.</string>
+    <string name="ai_try_asking">Try asking:</string>
+    <string name="ai_suggestion_wear">Find me some outfit options for a casual party</string>
+    <string name="ai_suggestion_shoes">What in stock running shoes are available?</string>
+    <string name="ai_suggestion_compare">Compare product 10001 and 10002</string>
+    <string name="ai_suggestion_cart">Show my shopping cart</string>
+    <string name="ai_recording">Recording…</string>
+    <string name="commonCancel">Cancel</string>
+    <string name="ai_welcome_assistant_message">Hi! I\'m Aivo, your personal shopping assistant. I can help you search products, manage your cart, and place orders. How can I help you today?</string>
+    <string name="ai_copied_toast">Copied to clipboard</string>
+    <string name="errorUnknownTitle">Error occurred</string>
+    <string name="commonRetry">Retry</string>
+    <string name="ai_listening">Listening…</string>
+    <string name="ai_message_placeholder">Ask Aivo anything…</string>
+    <string name="ai_chat_header_title">Aivo</string>
+    <string name="ai_chat_header_subtitle">Universal AI Assistant</string>
+    <string name="commonBack">Back</string>
+</resources>
